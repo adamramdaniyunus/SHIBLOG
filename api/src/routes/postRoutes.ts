@@ -6,7 +6,8 @@ import {
     getPost,
     deletePost,
     getAllPost,
-    updatePost
+    updatePost,
+    getAllPosts
 } from './../controllers/postController';
 import {
     createComment,
@@ -17,6 +18,7 @@ import {
 router.post("/post", authGuard, createPost);
 router.get("/post/:slug", getPost)
 router.get("/posts", getAllPost)
+router.get("/allposts", getAllPosts)
 router.delete("/post/:slug", authGuard, deletePost)
 router.patch("/post/:slug", authGuard, updatePost)
 

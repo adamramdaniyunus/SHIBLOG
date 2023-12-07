@@ -99,6 +99,10 @@ export const getPost = async (req: express.Request & { user?: { admin: boolean, 
                 select: ["title"],
             },
             {
+                path: "tags",
+                select: ["title"],
+            },
+            {
                 path: "comments",
                 match: {
                     check: true,
@@ -195,6 +199,18 @@ export const getAllPost = async (req: express.Request & { user?: { admin: boolea
                 },
             ])
             .sort({ updatedAt: "desc" });
+
+        return res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+// get all posts
+export const getAllPosts = async (req: express.Request & { user?: { admin: boolean, _id: string } }, res: express.Response, next: express.NextFunction) => {
+    try {
+        const result = await Post.find({})
 
         return res.json(result);
     } catch (error) {

@@ -16,6 +16,7 @@ import Admin from './pages/admin/components/screen/Admin';
 import EditPost from './pages/admin/components/screen/posts/EditPost';
 import ManagePosts from './pages/admin/components/screen/posts/ManagePosts';
 import AllBlogs from './pages/blogs/AllBlogs';
+import Comments from './pages/admin/components/screen/comments/Comments';
 
 function App() {
   const userState = useSelector(state => state.user)
@@ -51,6 +52,7 @@ function App() {
           <Route index element={<Admin />} />
           <Route path="posts/manage/edit/:slug" element={<EditPost />} />
           <Route path="posts/manage" element={<ManagePosts />} />
+          <Route path="comments" element={<Comments />} />
         </Route>
       </Routes>
       <Toaster />

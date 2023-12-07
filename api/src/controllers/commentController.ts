@@ -70,3 +70,45 @@ export const deleteComment = async (req: express.Request, res: express.Response,
         next(error)
     }
 }
+
+
+// get all comment
+
+export const getAllComment = async (req: express.Request & { user?: { admin: boolean, _id: string } }, res: express.Response, next: express.NextFunction) => {
+    try {
+        const comment = await Comment.find({
+            check: false
+        }).populate([
+            {
+                path: "user",
+                select: ["avatar", "name"],
+            }
+        ])
+
+        return res.json({ data: comment })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// checked comment
+
+export const checkComment = async (req: express.Request & { user?: { admin: boolean, _id: string } }, res: express.Response, next: express.NextFunction) => {
+    const { commentId } = req.params
+    try {
+        const comment = await Comment.findById(commentId)
+
+        if (!comment) {
+            const error = new Error("Comment not found");
+            return next(error)
+        }
+
+        await comment.updateOne({
+            check: true
+        })
+
+        return res.json({ data: comment })
+    } catch (error) {
+        next(error)
+    }
+}

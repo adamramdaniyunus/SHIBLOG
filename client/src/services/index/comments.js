@@ -50,3 +50,31 @@ export const deleteComment = async ({ token, commentId }) => {
         throw new Error(error.message);
     }
 }
+
+export const getAllComments = async () => {
+    try {
+
+        const { data } = await axios.get('/api/comment/comments')
+        return data
+    } catch (error) {
+        if (error.response && error.response.data.message)
+            throw new Error(error.response.data.message);
+        throw new Error(error.message);
+    }
+}
+
+export const checkComment = async ({ id, token }) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const { data } = await axios.post(`/api/comment/comments/${id}`, {}, config)
+        return data
+    } catch (error) {
+        if (error.response && error.response.data.message)
+            throw new Error(error.response.data.message);
+        throw new Error(error.message);
+    }
+}

@@ -11,6 +11,8 @@ import {
 import userRoutes from "./routes/userRoutes"
 import postRoutes from "./routes/postRoutes"
 import categoryRoutes from "./routes/categoryRoutes"
+import commentRoutes from "./routes/commentRoutes"
+import tagsRoutes from "./routes/tagsRoutes"
 dotenv.config()
 
 const port = process.env.PORT
@@ -29,7 +31,9 @@ app.use(cors({
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use("/api/user/", userRoutes)
 app.use("/api/blog/", postRoutes)
-app.use("/api/tags/", categoryRoutes)
+app.use("/api/categories/", categoryRoutes)
+app.use("/api/comment/", commentRoutes)
+app.use("/api/tag/", tagsRoutes)
 // midlewares
 app.use(errorResponserHandler);
 app.use(invalidPathHandler)
